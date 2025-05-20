@@ -1,37 +1,160 @@
-.invisivel{
-    display:none;
-  }
-  .visivel{
-    display:inline;
-  }
-  .inicial {
-    text-align: center;
-    font-size: 100px;
-    background-color: lightgrey;
-    width: 150px;
-    height: 200px;
-    border: 15px solid green;
-    padding: 10px;
-    margin: 20px;
-  }
-  .acertou {
-    text-align: center;
-    color: yellow;
-    background-color: LawnGreen;
-    width: 150px;
-    height: 200px;
-    border: 15px solid yellow;
-    padding: 10px;
-    margin: 20px;
-  }
-  .errou {
-    text-align: center;
-    font-size: 100px;
-    color: white;
-    background-color: red;
-    width: 150px;
-    height: 200px;
-    border: 15px solid black;
-    padding: 10px;
-    margin: 20px;
-  }
+:root {
+  --primary: #4361ee;
+  --secondary: #f72585;
+  --success: #4CAF50;
+  --error: #f44336;
+  --gray: #6c757d;
+  --light: #f8f9fa;
+  --dark: #212529;
+  --transition: all 0.3s ease;
+}
+
+body {
+  margin: 0;
+  font-family: 'Montserrat', sans-serif;
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.game-wrapper {
+  width: 100%;
+  max-width: 800px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.game-header {
+  background: linear-gradient(to right, var(--primary), #3a56d4);
+  color: white;
+  text-align: center;
+  padding: 2rem;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.card {
+  perspective: 1000px;
+  cursor: pointer;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3/4;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.card.flipped .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.5rem;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.card-front {
+  background: #eee;
+  color: var(--gray);
+}
+
+.card-back {
+  background: white;
+  transform: rotateY(180deg);
+}
+
+.card.acertou .card-back {
+  background: var(--success);
+  color: white;
+}
+
+.card.erro .card-front {
+  background: var(--error);
+  color: white;
+}
+
+.game-stats {
+  display: flex;
+  justify-content: space-around;
+  padding: 1rem;
+}
+
+.stat-box {
+  text-align: center;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--gray);
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+}
+
+.game-footer {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  background: var(--light);
+}
+
+.game-button {
+  padding: 0.8rem 1.2rem;
+  border: none;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.game-button.primary {
+  background: var(--primary);
+  color: white;
+}
+.card.acertou .card-back {
+  background: var(--success);
+  color: white;
+}
+
+.card.erro .card-back {
+  background: var(--error);
+  color: white;
+}
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.card-back {
+  background: white;
+  transform: rotateY(180deg);
+  font-size: 2.5rem;
+  transition: opacity 0.3s ease;
+  opacity: 0;
+}
+
+.card.flipped .card-back {
+  opacity: 1;
+}
